@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/TodoApp');
+mongoose.connect('mongodb://localhost:27017/TodoApp', { useNewUrlParser: true });
 
 
 var Todo = mongoose.model('Todo', {
@@ -22,7 +22,7 @@ var newTodo = new Todo({
 newTodo.save().then((doc) => {
         console.log('Saved todo', doc);
     },
-    () => {
-        console.log('Unable to save todo');
+    (err) => {
+        console.log('Unable to save todo', err);
     }
 );
